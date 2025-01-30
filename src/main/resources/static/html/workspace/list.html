@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Card List App</title>
+    <link rel="stylesheet" href="../../css/component.css" />
+    <link rel="stylesheet" href="../../css/layout.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="/js/module/apiClient.js"></script>
+    <script src="/js/module/menu.js"></script>
+    <script src="/js/workspace/list.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar">
+        <div class="nav-header">
+          <img
+            src="https://via.placeholder.com/100x40?text=Logo"
+            alt="Logo"
+            class="logo"
+          />
+          <button id="menu-toggle" class="btn btn-toggle">
+            <span id="menu-toggle-icon" data-lucide="chevron-right"></span>
+          </button>
+        </div>
+        <ul class="nav-list">
+          <li class="active">
+            <a href="#">
+              <i data-lucide="home"></i>
+              <span>Home</span>
+            </a>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle">
+              <i data-lucide="box"></i>
+              <span>Products</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Category 1</a></li>
+              <li><a href="#">Category 2</a></li>
+              <li><a href="#">Category 3</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">
+              <i data-lucide="info"></i>
+              <span>About</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i data-lucide="mail"></i>
+              <span>Contact</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main>
+        <header>
+          <div class="middle-section"></div>
+          <div class="right-section">
+            <button id="login-btn" class="btn btn-primary">Login</button>
+            <button
+              id="logout-btn"
+              class="btn btn-danger"
+              style="display: none"
+            >
+              Logout
+            </button>
+          </div>
+        </header>
+        <div class="content">
+          <div class="top-bar">
+            <div class="breadcrumb">
+              <span>Home</span> &gt; <span>Cards</span>
+            </div>
+            <button id="add-card" class="add-button">+</button>
+          </div>
+          <div id="workspace-list" class="card-list"></div>
+        </div>
+      </main>
+    </div>
+
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <form id="workspace-form" class="form">
+          <input type="hidden" id="action" value="create" />
+          <input type="hidden" id="workspaceId" value="create" />
+          <input
+            type="text"
+            id="workspace-name"
+            placeholder="이름을 입력해주세요."
+            required
+          />
+          <button id="submit-button" type="button" class="btn btn-success">
+            등록
+          </button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

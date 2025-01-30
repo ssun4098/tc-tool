@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Card List App</title>
+    <link rel="stylesheet" href="../../css/component.css" />
+    <link rel="stylesheet" href="../../css/layout.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="/js/module/apiClient.js"></script>
+    <script src="/js/module/menu.js"></script>
+    <script src="/js/testcase/list.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar">
+        <div class="nav-header">
+          <img
+            src="https://via.placeholder.com/100x40?text=Logo"
+            alt="Logo"
+            class="logo"
+          />
+          <button id="menu-toggle" class="btn btn-toggle">
+            <span id="menu-toggle-icon" data-lucide="chevron-right"></span>
+          </button>
+        </div>
+        <ul class="nav-list">
+          <li class="active">
+            <a href="#">
+              <i data-lucide="home"></i>
+              <span>Home</span>
+            </a>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle">
+              <i data-lucide="box"></i>
+              <span>Products</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Category 1</a></li>
+              <li><a href="#">Category 2</a></li>
+              <li><a href="#">Category 3</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">
+              <i data-lucide="info"></i>
+              <span>About</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i data-lucide="mail"></i>
+              <span>Contact</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main>
+        <header>
+          <div class="middle-section"></div>
+          <div class="right-section">
+            <button id="login-btn" class="btn btn-primary">Login</button>
+            <button
+              id="logout-btn"
+              class="btn btn-danger"
+              style="display: none"
+            >
+              Logout
+            </button>
+          </div>
+        </header>
+        <div class="content">
+          <div class="top-bar">
+            <div class="breadcrumb">
+              <span>Home</span> &gt; <span>Cards</span>
+            </div>
+            <button id="add-testcase" class="add-button">+</button>
+          </div>
+          <div class="search-bar">
+            <i data-lucide="search" class="search-icon"></i>
+            <input type="text" class="search-input" placeholder="Search...">
+            <button class="clear-search-btn">
+              <i data-lucide="x"></i>
+            </button>
+          </div>
+          <div class="table-container">
+            <table class="custom-table">
+              <thead>
+              <tr>
+                <th class="sortable" data-sort="id">
+                  ID
+                  <i data-lucide="arrow-up-down" class="sort-icon"></i>
+                </th>
+                <th class="sortable" data-sort="name">
+                  Name
+                  <i data-lucide="arrow-up-down" class="sort-icon"></i>
+                </th>
+                <th class="sortable filterable" data-sort="status" data-filter="status">
+                  Status
+                  <i data-lucide="arrow-up-down" class="sort-icon"></i>
+                  <i data-lucide="filter" class="filter-icon"></i>
+                </th>
+                <th class="sortable filterable" data-sort="role" data-filter="role">
+                  Role
+                  <i data-lucide="arrow-up-down" class="sort-icon"></i>
+                  <i data-lucide="filter" class="filter-icon"></i>
+                </th>
+                <th class="sortable filterable" data-sort="category1" data-filter="category1">
+                  Category 1
+                  <i data-lucide="arrow-up-down" class="sort-icon"></i>
+                  <i data-lucide="filter" class="filter-icon"></i>
+                </th>
+                <th class="sortable" data-sort="category2">
+                  Category 2
+                  <i data-lucide="arrow-up-down" class="sort-icon"></i>
+                </th>
+                <th class="sortable" data-sort="category3">
+                  Category 3
+                  <i data-lucide="arrow-up-down" class="sort-icon"></i>
+                </th>
+                <th>Execute</th>
+                <th>Actions</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>1</td>
+                <td class="align-center">
+                  <div class="user-label">
+                    <img src="https://i.pravatar.cc/40?img=1" alt="User 1" class="user-avatar">
+                    <span>John Doe</span>
+                  </div>
+                </td>
+                <td><span class="status-label status-active">Active</span></td>
+                <td><span class="user-badge admin">Admin</span></td>
+                <td>Electronics</td>
+                <td>Computers</td>
+                <td>Laptops</td>
+                <td>
+                  <button class="btn btn-execute"><i data-lucide="play"></i> Execute</button>
+                </td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="btn btn-icon btn-primary" data-tooltip="Edit">
+                      <i data-lucide="edit-2"></i>
+                    </button>
+                    <button class="btn btn-icon btn-danger" data-tooltip="Delete">
+                      <i data-lucide="trash-2"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>
+                  <div class="user-info">
+                    <img src="https://i.pravatar.cc/40?img=2" alt="User 2" class="user-avatar">
+                    <span>Jane Smith</span>
+                  </div>
+                </td>
+                <td><span class="status-label status-inactive">Inactive</span></td>
+                <td><span class="user-badge user">User</span></td>
+                <td>Clothing</td>
+                <td>Women's Wear</td>
+                <td>Dresses</td>
+                <td>
+                  <button class="btn btn-execute"><i data-lucide="play"></i> Execute</button>
+                </td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="btn btn-icon" data-tooltip="Edit">
+                      <i data-lucide="edit-2"></i>
+                    </button>
+                    <button class="btn btn-icon" data-tooltip="Delete">
+                      <i data-lucide="trash-2"></i>
+                    </button>
+                    <button class="btn btn-icon" data-tooltip="More">
+                      <i data-lucide="more-horizontal"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>
+                  <div class="user-info">
+                    <img src="https://i.pravatar.cc/40?img=3" alt="User 3" class="user-avatar">
+                    <span>Bob Johnson</span>
+                  </div>
+                </td>
+                <td><span class="status-label status-pending">Pending</span></td>
+                <td><span class="user-badge moderator">Moderator</span></td>
+                <td>Home & Garden</td>
+                <td>Furniture</td>
+                <td>Sofas</td>
+                <td>
+                  <button class="btn btn-execute"><i data-lucide="play"></i> Execute</button>
+                </td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="btn btn-icon" data-tooltip="Edit">
+                      <i data-lucide="edit-2"></i>
+                    </button>
+                    <button class="btn btn-icon" data-tooltip="Delete">
+                      <i data-lucide="trash-2"></i>
+                    </button>
+                    <button class="btn btn-icon" data-tooltip="More">
+                      <i data-lucide="more-horizontal"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+
+      <div id="testcase-modal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <form id="workspace-form" class="form">
+            <input type="hidden" id="action" value="create">
+            <input type="hidden" id="workspaceId" value="create">
+            <input
+                    type="text"
+                    id="testcase-name"
+                    placeholder="이름을 입력해주세요."
+                    required
+            />
+            <input
+                    type="text"
+                    id="testcase-assignee"
+                    placeholder="담당자를 입력해주세요."
+                    required
+            />
+            <input
+                    type="text"
+                    id="testcase-category1"
+                    placeholder="카테고리1을 입력해주세요."
+                    required
+            />
+            <input
+                    type="text"
+                    id="testcase-category2"
+                    placeholder="카테고리2를 입력해주세요."
+                    required
+            />
+            <input
+                    type="text"
+                    id="testcase-category3"
+                    placeholder="카테고리3를 입력해주세요."
+                    required
+            />
+            <textarea id="testcase-explanation" placeholder="설명을 입력해주세요."></textarea>
+            <button id="submit-button" type="button" class="btn btn-success">등록</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Filter Dropdown Template -->
+      <template id="filter-dropdown-template">
+        <div class="filter-dropdown">
+          <div class="filter-dropdown-content">
+            <div class="filter-search">
+              <input type="text" class="filter-search-input" placeholder="Search...">
+            </div>
+            <div class="filter-options">
+              <!-- Filter options will be dynamically added here -->
+            </div>
+            <div class="filter-actions">
+              <button class="btn btn-apply-filter">Apply</button>
+              <button class="btn btn-clear-filter">Clear</button>
+            </div>
+          </div>
+        </div>
+      </template>
+    </div>
+  </body>
+</html>
