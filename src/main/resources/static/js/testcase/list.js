@@ -1,184 +1,141 @@
 document.addEventListener("DOMContentLoaded", () => {
   lucide.createIcons();
+  const $addTestcaseButton = document.getElementById('add-testcase-button');
+  const $testcaseModal = document.getElementById('testcase-modal');
+  const $closeModalButton = document.getElementsByClassName("close")[0];
+  const $testcaseSubmitButton = document.getElementById("testcase-submit-button");
 
-  const searchInput = document.querySelector(".search-input");
-  const clearSearchBtn = document.querySelector(".clear-search-btn");
-  const table = document.querySelector(".custom-table");
-  const sortableHeaders = document.querySelectorAll(
-    ".custom-table th.sortable"
-  );
-  const filterableHeaders = document.querySelectorAll(
-    ".custom-table th.filterable"
-  );
-  const addTestcase = document.getElementById("add-testcase");
-  const modal = document.getElementById("testcase-modal");
+  $addTestcaseButton.addEventListener("click", () => {
+      $testcaseModal.style.display = "block";
+  })
 
-  addTestcase.addEventListener("click", () => (modal.style.display = "block"));
+  $closeModalButton.addEventListener("click", () => {
+      $testcaseModal.style.display = "none";
+  })
 
-  // Sorting functionality
-  sortableHeaders.forEach((header) => {
-    header.addEventListener("click", () => {
-      const sortBy = header.getAttribute("data-sort");
-      const isAsc = header.classList.contains("asc");
-
-      sortableHeaders.forEach((h) => h.classList.remove("asc", "desc"));
-      header.classList.add(isAsc ? "desc" : "asc");
-
-      sortTable(sortBy, !isAsc);
-    });
-  });
-
-  // Filtering functionality
-  filterableHeaders.forEach((header) => {
-    const filterIcon = header.querySelector(".filter-icon");
-    filterIcon.addEventListener("click", (event) => {
-      event.stopPropagation(); // Prevent sorting when clicking on filter icon
-      showFilterDropdown(header);
-    });
-  });
-
-  // Search functionality
-  searchInput.addEventListener("input", performSearch);
-  clearSearchBtn.addEventListener("click", clearSearch);
-
-  function sortTable(sortBy, ascending) {
-    const tbody = table.querySelector("tbody");
-    const rows = Array.from(tbody.querySelectorAll("tr"));
-
-    rows.sort((a, b) => {
-      const aValue = a.querySelector(
-        `td:nth-child(${getColumnIndex(sortBy)})`
-      ).textContent;
-      const bValue = b.querySelector(
-        `td:nth-child(${getColumnIndex(sortBy)})`
-      ).textContent;
-
-      if (sortBy === "id") {
-        return ascending ? aValue - bValue : bValue - aValue;
-      } else {
-        return ascending
-          ? aValue.localeCompare(bValue)
-          : bValue.localeCompare(aValue);
-      }
-    });
-
-    tbody.append(...rows);
-  }
-
-  function getColumnIndex(columnName) {
-    const headers = Array.from(table.querySelectorAll("th"));
-    return (
-      headers.findIndex(
-        (header) => header.getAttribute("data-sort") === columnName
-      ) + 1
-    );
-  }
-
-  function showFilterDropdown(header) {
-    const existingDropdown = document.querySelector(".filter-dropdown");
-    if (existingDropdown) {
-      existingDropdown.remove();
-    }
-
-    const filterBy = header.getAttribute("data-filter");
-    const columnIndex = getColumnIndex(filterBy);
-    const uniqueValues = getUniqueValues(columnIndex);
-
-    const dropdownTemplate = document.getElementById(
-      "filter-dropdown-template"
-    );
-    const dropdown = dropdownTemplate.content
-      .cloneNode(true)
-      .querySelector(".filter-dropdown");
-
-    const optionsContainer = dropdown.querySelector(".filter-options");
-    uniqueValues.forEach((value) => {
-      const option = document.createElement("div");
-      option.classList.add("filter-option");
-      option.innerHTML = `
-                    <input type="checkbox" id="${value}" value="${value}">
-                    <label for="${value}">${value}</label>
-                `;
-      optionsContainer.appendChild(option);
-    });
-
-    const applyFilterBtn = dropdown.querySelector(".btn-apply-filter");
-    applyFilterBtn.addEventListener("click", () => applyFilter(columnIndex));
-
-    const clearFilterBtn = dropdown.querySelector(".btn-clear-filter");
-    clearFilterBtn.addEventListener("click", () => clearFilter(columnIndex));
-
-    header.appendChild(dropdown);
-
-    // Close dropdown when clicking outside
-    document.addEventListener("click", closeFilterDropdown);
-  }
-
-  function getUniqueValues(columnIndex) {
-    const values = new Set();
-    const rows = table.querySelectorAll("tbody tr");
-    rows.forEach((row) => {
-      const cell = row.querySelector(`td:nth-child(${columnIndex})`);
-      values.add(cell.textContent.trim());
-    });
-    return Array.from(values);
-  }
-
-  function applyFilter(columnIndex) {
-    const checkedValues = Array.from(
-      document.querySelectorAll(".filter-option input:checked")
-    ).map((checkbox) => checkbox.value);
-
-    const rows = table.querySelectorAll("tbody tr");
-    rows.forEach((row) => {
-      const cell = row.querySelector(`td:nth-child(${columnIndex})`);
-      const value = cell.textContent.trim();
-      row.style.display = checkedValues.includes(value) ? "" : "none";
-    });
-
-    closeFilterDropdown();
-  }
-
-  function clearFilter(columnIndex) {
-    const rows = table.querySelectorAll("tbody tr");
-    rows.forEach((row) => {
-      row.style.display = "";
-    });
-
-    closeFilterDropdown();
-  }
-
-  function closeFilterDropdown(event) {
-    if (event && event.target.closest(".filter-dropdown")) return;
-    const dropdown = document.querySelector(".filter-dropdown");
-    if (dropdown) {
-      dropdown.remove();
-    }
-    document.removeEventListener("click", closeFilterDropdown);
-  }
-
-  function performSearch() {
-    const searchTerm = searchInput.value.toLowerCase();
-    const rows = table.querySelectorAll("tbody tr");
-
-    rows.forEach((row) => {
-      const text = row.textContent.toLowerCase();
-      row.style.display = text.includes(searchTerm) ? "" : "none";
-    });
-
-    updateClearSearchButtonVisibility();
-  }
-
-  function clearSearch() {
-    searchInput.value = "";
-    const rows = table.querySelectorAll("tbody tr");
-    rows.forEach((row) => {
-      row.style.display = "";
-    });
-    updateClearSearchButtonVisibility();
-  }
-
-  function updateClearSearchButtonVisibility() {
-    clearSearchBtn.style.display = searchInput.value ? "block" : "none";
-  }
+  $testcaseSubmitButton.addEventListener("click", () => {
+      const name = document.getElementById('testcase-name').value;
+      const category1 = document.getElementById('category1').value;
+      const category2 = document.getElementById('category2').value;
+      const category3 = document.getElementById('category3').value;
+      const assignee = document.getElementById('testcase-assignee').value;
+      const explanation = document.getElementById('testcase-explanation').value;
+      const url = new URL(window.location);
+      const workspaceId = url.searchParams.get("workspaceId");
+      apiClient.post('/api/testcases', {name,
+                                         category1,
+                                         category2,
+                                         category3,
+                                         assignee,
+                                         explanation,
+                                         workspaceId}, (data) => console.log(data));
+  })
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const category1 = document.getElementById("category1")
+  const category2 = document.getElementById("category2")
+  const category3 = document.getElementById("category3")
+  const selectedCategoriesDisplay = document.getElementById("selectedCategoriesDisplay")
+
+  // 카테고리 데이터 (실제 사용 시 서버에서 가져오거나 더 큰 데이터셋을 사용해야 합니다)
+  const categoriesData = {
+    개발: {
+      웹: ["프론트엔드", "백엔드", "풀스택"],
+      모바일: ["iOS", "Android", "크로스플랫폼"],
+      데이터: ["데이터 분석", "머신러닝", "빅데이터"],
+    },
+    디자인: {
+      그래픽: ["로고", "브랜딩", "일러스트레이션"],
+      "UI/UX": ["웹 디자인", "앱 디자인", "프로토타이핑"],
+      "3D": ["모델링", "애니메이션", "렌더링"],
+    },
+    마케팅: {
+      디지털: ["소셜 미디어", "콘텐츠 마케팅", "SEO"],
+      브랜드: ["브랜드 전략", "브랜드 아이덴티티", "브랜드 관리"],
+      광고: ["온라인 광고", "오프라인 광고", "통합 마케팅"],
+    },
+  }
+
+  // 1차 카테고리 옵션 추가
+  Object.keys(categoriesData).forEach((cat) => {
+    const option = document.createElement("option")
+    option.value = cat
+    option.textContent = cat
+    category1.appendChild(option)
+  })
+
+  // 1차 카테고리 선택 시 이벤트
+  category1.addEventListener("change", function () {
+    category2.innerHTML = '<option value="">선택해주세요</option>'
+    category3.innerHTML = '<option value="">선택해주세요</option>'
+    category3.disabled = true
+
+    if (this.value) {
+      category2.disabled = false
+      Object.keys(categoriesData[this.value]).forEach((cat) => {
+        const option = document.createElement("option")
+        option.value = cat
+        option.textContent = cat
+        category2.appendChild(option)
+      })
+    } else {
+      category2.disabled = true
+    }
+  })
+
+  // 2차 카테고리 선택 시 이벤트
+  category2.addEventListener("change", function () {
+    category3.innerHTML = '<option value="">선택해주세요</option>'
+
+    if (this.value) {
+      category3.disabled = false
+      categoriesData[category1.value][this.value].forEach((cat) => {
+        const option = document.createElement("option")
+        option.value = cat
+        option.textContent = cat
+        category3.appendChild(option)
+      })
+    } else {
+      category3.disabled = true
+    }
+  })
+})
+
+function setupAutocomplete(inputId, suggestionsId, data) {
+  const input = document.getElementById(inputId)
+  const suggestions = document.getElementById(suggestionsId)
+
+  input.addEventListener("keydown", function () {
+    const value = this.value.toLowerCase()
+    suggestions.innerHTML = ""
+    suggestions.style.display = "none"
+
+    if (value.length > 0) {
+      const matches = data.filter((item) => item.toLowerCase().includes(value))
+      if (matches.length > 0) {
+        matches.forEach((match) => {
+          const div = document.createElement("div")
+          div.textContent = match
+          div.addEventListener("click", () => {
+            input.value = match
+            suggestions.style.display = "none"
+          })
+          suggestions.appendChild(div)
+        })
+        suggestions.style.display = "block"
+      }
+    }
+  })
+
+  document.addEventListener("click", (e) => {
+    if (e.target !== input && e.target !== suggestions) {
+      suggestions.style.display = "none"
+    }
+  })
+}
+const assignees = ["John Doe", "Jane Smith", "Alice Johnson", "Bob Williams"]
+
+document.addEventListener("DOMContentLoaded", () => {
+  setupAutocomplete("testcase-assignee", "assignee-suggestions", assignees)
+})

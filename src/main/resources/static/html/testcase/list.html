@@ -3,79 +3,80 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Card List App</title>
+    <title>테스트케이스 목록</title>
     <link rel="stylesheet" href="../../css/component.css" />
     <link rel="stylesheet" href="../../css/layout.css" />
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     <script src="/js/module/apiClient.js"></script>
     <script src="/js/module/menu.js"></script>
     <script src="/js/testcase/list.js"></script>
   </head>
   <body>
     <div class="container">
-      <nav class="navbar">
-        <div class="nav-header">
-          <img
-            src="https://via.placeholder.com/100x40?text=Logo"
-            alt="Logo"
-            class="logo"
-          />
-          <button id="menu-toggle" class="btn btn-toggle">
-            <span id="menu-toggle-icon" data-lucide="chevron-right"></span>
-          </button>
-        </div>
-        <ul class="nav-list">
-          <li class="active">
-            <a href="#">
-              <i data-lucide="home"></i>
-              <span>Home</span>
-            </a>
-          </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle">
-              <i data-lucide="box"></i>
-              <span>Products</span>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Category 1</a></li>
-              <li><a href="#">Category 2</a></li>
-              <li><a href="#">Category 3</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="#">
-              <i data-lucide="info"></i>
-              <span>About</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i data-lucide="mail"></i>
-              <span>Contact</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
+<!--      <nav class="navbar">-->
+<!--        <div class="nav-header">-->
+<!--          <img-->
+<!--            src="https://via.placeholder.com/100x40?text=Logo"-->
+<!--            alt="Logo"-->
+<!--            class="logo"-->
+<!--          />-->
+<!--          <button id="menu-toggle" class="btn btn-toggle">-->
+<!--            <span id="menu-toggle-icon" data-lucide="chevron-right"></span>-->
+<!--          </button>-->
+<!--        </div>-->
+<!--        <ul class="nav-list">-->
+<!--          <li class="active">-->
+<!--            <a href="#">-->
+<!--              <i data-lucide="home"></i>-->
+<!--              <span>Home</span>-->
+<!--            </a>-->
+<!--          </li>-->
+<!--          <li class="dropdown">-->
+<!--            <a href="#" class="dropdown-toggle">-->
+<!--              <i data-lucide="box"></i>-->
+<!--              <span>Products</span>-->
+<!--            </a>-->
+<!--            <ul class="dropdown-menu">-->
+<!--              <li><a href="#">Category 1</a></li>-->
+<!--              <li><a href="#">Category 2</a></li>-->
+<!--              <li><a href="#">Category 3</a></li>-->
+<!--            </ul>-->
+<!--          </li>-->
+<!--          <li>-->
+<!--            <a href="#">-->
+<!--              <i data-lucide="info"></i>-->
+<!--              <span>About</span>-->
+<!--            </a>-->
+<!--          </li>-->
+<!--          <li>-->
+<!--            <a href="#">-->
+<!--              <i data-lucide="mail"></i>-->
+<!--              <span>Contact</span>-->
+<!--            </a>-->
+<!--          </li>-->
+<!--        </ul>-->
+<!--      </nav>-->
       <main>
         <header>
           <div class="middle-section"></div>
           <div class="right-section">
-            <button id="login-btn" class="btn btn-primary">Login</button>
-            <button
-              id="logout-btn"
-              class="btn btn-danger"
-              style="display: none"
-            >
-              Logout
-            </button>
+<!--            <button id="login-btn" class="btn btn-primary">Login</button>-->
+<!--            <button-->
+<!--              id="logout-btn"-->
+<!--              class="btn btn-danger"-->
+<!--              style="display: none"-->
+<!--            >-->
+<!--              Logout-->
+<!--            </button>-->
           </div>
         </header>
         <div class="content">
           <div class="top-bar">
-            <div class="breadcrumb">
-              <span>Home</span> &gt; <span>Cards</span>
-            </div>
-            <button id="add-testcase" class="add-button">+</button>
+<!--            <div class="breadcrumb">-->
+<!--              <span>Home</span> &gt; <span>Cards</span>-->
+<!--            </div>-->
+            <button id="add-testcase-button" class="add-button">+</button>
           </div>
           <div class="search-bar">
             <i data-lucide="search" class="search-icon"></i>
@@ -89,22 +90,12 @@
               <thead>
               <tr>
                 <th class="sortable" data-sort="id">
-                  ID
-                  <i data-lucide="arrow-up-down" class="sort-icon"></i>
+                  CODE
+<!--                  <i data-lucide="arrow-up-down" class="sort-icon"></i>-->
                 </th>
                 <th class="sortable" data-sort="name">
-                  Name
-                  <i data-lucide="arrow-up-down" class="sort-icon"></i>
-                </th>
-                <th class="sortable filterable" data-sort="status" data-filter="status">
-                  Status
-                  <i data-lucide="arrow-up-down" class="sort-icon"></i>
-                  <i data-lucide="filter" class="filter-icon"></i>
-                </th>
-                <th class="sortable filterable" data-sort="role" data-filter="role">
-                  Role
-                  <i data-lucide="arrow-up-down" class="sort-icon"></i>
-                  <i data-lucide="filter" class="filter-icon"></i>
+                  제목
+<!--                  <i data-lucide="arrow-up-down" class="sort-icon"></i>-->
                 </th>
                 <th class="sortable filterable" data-sort="category1" data-filter="category1">
                   Category 1
@@ -119,6 +110,16 @@
                   Category 3
                   <i data-lucide="arrow-up-down" class="sort-icon"></i>
                 </th>
+                <th class="sortable filterable" data-sort="status" data-filter="status">
+                  상태
+<!--                  <i data-lucide="arrow-up-down" class="sort-icon"></i>-->
+<!--                  <i data-lucide="filter" class="filter-icon"></i>-->
+                </th>
+                <th class="sortable filterable" data-sort="role" data-filter="role">
+                  담당자
+                  <i data-lucide="arrow-up-down" class="sort-icon"></i>
+                  <i data-lucide="filter" class="filter-icon"></i>
+                </th>
                 <th>Execute</th>
                 <th>Actions</th>
               </tr>
@@ -126,17 +127,17 @@
               <tbody>
               <tr>
                 <td>1</td>
+                <td><b>테스트케이스1</b></td>
+                <td>Electronics</td>
+                <td>Computers</td>
+                <td>Laptops</td>
+                <td><span class="status-label-bg status-active">Active</span></td>
                 <td class="align-center">
                   <div class="user-label">
                     <img src="https://i.pravatar.cc/40?img=1" alt="User 1" class="user-avatar">
                     <span>John Doe</span>
                   </div>
                 </td>
-                <td><span class="status-label status-active">Active</span></td>
-                <td><span class="user-badge admin">Admin</span></td>
-                <td>Electronics</td>
-                <td>Computers</td>
-                <td>Laptops</td>
                 <td>
                   <button class="btn btn-execute"><i data-lucide="play"></i> Execute</button>
                 </td>
@@ -217,45 +218,58 @@
         </div>
       </main>
 
-      <div id="testcase-modal" class="modal">
-        <div class="modal-content">
-          <span class="close">&times;</span>
-          <form id="workspace-form" class="form">
-            <input type="hidden" id="action" value="create">
-            <input type="hidden" id="workspaceId" value="create">
-            <input
-                    type="text"
-                    id="testcase-name"
-                    placeholder="이름을 입력해주세요."
-                    required
-            />
-            <input
-                    type="text"
-                    id="testcase-assignee"
-                    placeholder="담당자를 입력해주세요."
-                    required
-            />
-            <input
-                    type="text"
-                    id="testcase-category1"
-                    placeholder="카테고리1을 입력해주세요."
-                    required
-            />
-            <input
-                    type="text"
-                    id="testcase-category2"
-                    placeholder="카테고리2를 입력해주세요."
-                    required
-            />
-            <input
-                    type="text"
-                    id="testcase-category3"
-                    placeholder="카테고리3를 입력해주세요."
-                    required
-            />
-            <textarea id="testcase-explanation" placeholder="설명을 입력해주세요."></textarea>
-            <button id="submit-button" type="button" class="btn btn-success">등록</button>
-          </form>
+      <div class="modal-container">
+        <div id="testcase-modal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <form id="testcase-form" class="form modern-form">
+              <div class="form-group">
+                <label for="testcase-name">이름</label>
+                <input type="text" id="testcase-name" name="name" required>
+              </div>
+
+              <div class="form-group">
+                <div class="categories-container">
+                  <div class="category-select">
+                    <label for="category1">1차 카테고리</label>
+                    <select id="category1">
+                      <option value="">선택해주세요</option>
+                    </select>
+                  </div>
+                  <div class="category-select">
+                    <label for="category2">2차 카테고리</label>
+                    <select id="category2" disabled>
+                      <option value="">선택해주세요</option>
+                    </select>
+                  </div>
+                  <div class="category-select">
+                    <label for="category3">3차 카테고리</label>
+                    <select id="category3" disabled>
+                      <option value="">선택해주세요</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="testcase-assignee">담당자</label>
+                <div class="autocomplete-container">
+                  <input type="text" id="testcase-assignee" name="assignees">
+                  <div id="assignee-suggestions" class="suggestions"></div>
+                </div>
+                <div id="selected-assignees" class="selected-items"></div>
+              </div>
+
+              <div class="form-group">
+                <label>내용</label>
+                <div id="steps-container">
+                  <textarea id="testcase-explanation"></textarea>
+                </div>
+              </div>
+
+              <button id="testcase-submit-button" type="button" class="btn-submit modern-button">Submit</button>
+            </form>
+          </div>
         </div>
       </div>
 

@@ -34,7 +34,7 @@ class WorkspaceManager {
 
     createWorkspaceCard(workspace) {
             const $workspace = document.createElement("div");
-            $workspace.className = "card";
+            $workspace.className = "card clickable";
             $workspace.innerHTML = `
                 <h3>${workspace.name}</h3>
                 <div class="card-buttons">
