@@ -36,7 +36,7 @@ public class Testcase extends BaseEntity {
     private String category3;
 
     @Column(name = "status", nullable = false)
-    private TestStatus status = TestStatus.NOT_START;
+    private TestStatus status = TestStatus.NOT_STARTED;
 
     @Column(name = "deleted")
     private boolean isDeleted = false;
@@ -45,8 +45,11 @@ public class Testcase extends BaseEntity {
     @JoinColumn(name = "workspace_id")
     private Workspace workspace;
 
+    @Column(name = "link")
+    private String link;
+
     @Builder
-    public Testcase(String name, String explanation, String assignee, String category1, String category2, String category3, Workspace workspace) {
+    public Testcase(String name, String explanation, String assignee, String category1, String category2, String category3, String link, Workspace workspace) {
         this.name = name;
         this.explanation = explanation;
         this.assignee = assignee;
@@ -54,6 +57,7 @@ public class Testcase extends BaseEntity {
         this.category2 = category2;
         this.category3 = category3;
         this.workspace = workspace;
+        this.link = link;
     }
 
     public void delete() {

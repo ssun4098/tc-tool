@@ -7,6 +7,7 @@ import lombok.Getter;
 public class TestcaseCreateReq {
     private Long workspaceId;
     private String name;
+    private String link;
     private String explanation;
     private String assignee;
     private String category1;

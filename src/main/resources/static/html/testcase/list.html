@@ -124,94 +124,94 @@
                 <th>Actions</th>
               </tr>
               </thead>
-              <tbody>
-              <tr>
-                <td>1</td>
-                <td><b>테스트케이스1</b></td>
-                <td>Electronics</td>
-                <td>Computers</td>
-                <td>Laptops</td>
-                <td><span class="status-label-bg status-active">Active</span></td>
-                <td class="align-center">
-                  <div class="user-label">
-                    <img src="https://i.pravatar.cc/40?img=1" alt="User 1" class="user-avatar">
-                    <span>John Doe</span>
-                  </div>
-                </td>
-                <td>
-                  <button class="btn btn-execute"><i data-lucide="play"></i> Execute</button>
-                </td>
-                <td>
-                  <div class="action-buttons">
-                    <button class="btn btn-icon btn-primary" data-tooltip="Edit">
-                      <i data-lucide="edit-2"></i>
-                    </button>
-                    <button class="btn btn-icon btn-danger" data-tooltip="Delete">
-                      <i data-lucide="trash-2"></i>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>
-                  <div class="user-info">
-                    <img src="https://i.pravatar.cc/40?img=2" alt="User 2" class="user-avatar">
-                    <span>Jane Smith</span>
-                  </div>
-                </td>
-                <td><span class="status-label status-inactive">Inactive</span></td>
-                <td><span class="user-badge user">User</span></td>
-                <td>Clothing</td>
-                <td>Women's Wear</td>
-                <td>Dresses</td>
-                <td>
-                  <button class="btn btn-execute"><i data-lucide="play"></i> Execute</button>
-                </td>
-                <td>
-                  <div class="action-buttons">
-                    <button class="btn btn-icon" data-tooltip="Edit">
-                      <i data-lucide="edit-2"></i>
-                    </button>
-                    <button class="btn btn-icon" data-tooltip="Delete">
-                      <i data-lucide="trash-2"></i>
-                    </button>
-                    <button class="btn btn-icon" data-tooltip="More">
-                      <i data-lucide="more-horizontal"></i>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>
-                  <div class="user-info">
-                    <img src="https://i.pravatar.cc/40?img=3" alt="User 3" class="user-avatar">
-                    <span>Bob Johnson</span>
-                  </div>
-                </td>
-                <td><span class="status-label status-pending">Pending</span></td>
-                <td><span class="user-badge moderator">Moderator</span></td>
-                <td>Home & Garden</td>
-                <td>Furniture</td>
-                <td>Sofas</td>
-                <td>
-                  <button class="btn btn-execute"><i data-lucide="play"></i> Execute</button>
-                </td>
-                <td>
-                  <div class="action-buttons">
-                    <button class="btn btn-icon" data-tooltip="Edit">
-                      <i data-lucide="edit-2"></i>
-                    </button>
-                    <button class="btn btn-icon" data-tooltip="Delete">
-                      <i data-lucide="trash-2"></i>
-                    </button>
-                    <button class="btn btn-icon" data-tooltip="More">
-                      <i data-lucide="more-horizontal"></i>
-                    </button>
-                  </div>
-                </td>
-              </tr>
+              <tbody id="testcase-table-body">
+<!--              <tr>-->
+<!--                <td>1</td>-->
+<!--                <td><b>테스트케이스1</b></td>-->
+<!--                <td>Electronics</td>-->
+<!--                <td>Computers</td>-->
+<!--                <td>Laptops</td>-->
+<!--                <td><span class="status-label-bg status-active">Active</span></td>-->
+<!--                <td class="align-center">-->
+<!--                  <div class="user-label">-->
+<!--                    <img src="https://i.pravatar.cc/40?img=1" alt="User 1" class="user-avatar">-->
+<!--                    <span>John Doe</span>-->
+<!--                  </div>-->
+<!--                </td>-->
+<!--                <td>-->
+<!--                  <button class="btn btn-execute"><i data-lucide="play"></i> Execute</button>-->
+<!--                </td>-->
+<!--                <td>-->
+<!--                  <div class="action-buttons">-->
+<!--                    <button class="btn btn-icon btn-primary" data-tooltip="Edit">-->
+<!--                      <i data-lucide="edit-2"></i>-->
+<!--                    </button>-->
+<!--                    <button class="btn btn-icon btn-danger" data-tooltip="Delete">-->
+<!--                      <i data-lucide="trash-2"></i>-->
+<!--                    </button>-->
+<!--                  </div>-->
+<!--                </td>-->
+<!--              </tr>-->
+<!--              <tr>-->
+<!--                <td>2</td>-->
+<!--                <td>-->
+<!--                  <div class="user-info">-->
+<!--                    <img src="https://i.pravatar.cc/40?img=2" alt="User 2" class="user-avatar">-->
+<!--                    <span>Jane Smith</span>-->
+<!--                  </div>-->
+<!--                </td>-->
+<!--                <td><span class="status-label status-inactive">Inactive</span></td>-->
+<!--                <td><span class="user-badge user">User</span></td>-->
+<!--                <td>Clothing</td>-->
+<!--                <td>Women's Wear</td>-->
+<!--                <td>Dresses</td>-->
+<!--                <td>-->
+<!--                  <button class="btn btn-execute"><i data-lucide="play"></i> Execute</button>-->
+<!--                </td>-->
+<!--                <td>-->
+<!--                  <div class="action-buttons">-->
+<!--                    <button class="btn btn-icon" data-tooltip="Edit">-->
+<!--                      <i data-lucide="edit-2"></i>-->
+<!--                    </button>-->
+<!--                    <button class="btn btn-icon" data-tooltip="Delete">-->
+<!--                      <i data-lucide="trash-2"></i>-->
+<!--                    </button>-->
+<!--                    <button class="btn btn-icon" data-tooltip="More">-->
+<!--                      <i data-lucide="more-horizontal"></i>-->
+<!--                    </button>-->
+<!--                  </div>-->
+<!--                </td>-->
+<!--              </tr>-->
+<!--              <tr>-->
+<!--                <td>3</td>-->
+<!--                <td>-->
+<!--                  <div class="user-info">-->
+<!--                    <img src="https://i.pravatar.cc/40?img=3" alt="User 3" class="user-avatar">-->
+<!--                    <span>Bob Johnson</span>-->
+<!--                  </div>-->
+<!--                </td>-->
+<!--                <td><span class="status-label status-pending">Pending</span></td>-->
+<!--                <td><span class="user-badge moderator">Moderator</span></td>-->
+<!--                <td>Home & Garden</td>-->
+<!--                <td>Furniture</td>-->
+<!--                <td>Sofas</td>-->
+<!--                <td>-->
+<!--                  <button class="btn btn-execute"><i data-lucide="play"></i> Execute</button>-->
+<!--                </td>-->
+<!--                <td>-->
+<!--                  <div class="action-buttons">-->
+<!--                    <button class="btn btn-icon" data-tooltip="Edit">-->
+<!--                      <i data-lucide="edit-2"></i>-->
+<!--                    </button>-->
+<!--                    <button class="btn btn-icon" data-tooltip="Delete">-->
+<!--                      <i data-lucide="trash-2"></i>-->
+<!--                    </button>-->
+<!--                    <button class="btn btn-icon" data-tooltip="More">-->
+<!--                      <i data-lucide="more-horizontal"></i>-->
+<!--                    </button>-->
+<!--                  </div>-->
+<!--                </td>-->
+<!--              </tr>-->
               </tbody>
             </table>
           </div>
@@ -258,6 +258,13 @@
                   <div id="assignee-suggestions" class="suggestions"></div>
                 </div>
                 <div id="selected-assignees" class="selected-items"></div>
+              </div>
+
+              <div class="form-group">
+                <label for="testcase-link">링크</label>
+                <div class="autocomplete-container">
+                  <input type="text" id="testcase-link" name="link">
+                </div>
               </div>
 
               <div class="form-group">

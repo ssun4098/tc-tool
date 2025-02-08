@@ -5,10 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/workspaces")
 public class WorkspaceView {
 
-    @GetMapping
+    @GetMapping(path = {"/workspaces", "/"})
     public String list() {
         return "/html/workspace/list.html";
     }

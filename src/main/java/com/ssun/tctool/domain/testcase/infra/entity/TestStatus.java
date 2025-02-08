@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 public enum TestStatus implements BaseEnum<Integer> {
-    NOT_START(100),
+    NOT_STARTED(100),
     IN_PROGRESS(200),
     BLOCKED(300),
     ON_HOLD(301),

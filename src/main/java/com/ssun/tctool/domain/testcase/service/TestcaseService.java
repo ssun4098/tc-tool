@@ -29,6 +29,7 @@ public class TestcaseService {
 
         Testcase result = testcaseRepository.save(Testcase.builder()
                         .name(param.getName())
+                        .link(param.getLink())
                         .explanation(param.getExplanation())
                         .assignee(param.getAssignee())
                         .category1(param.getCategory1())
@@ -36,7 +37,7 @@ public class TestcaseService {
                         .category3(param.getCategory3())
                         .workspace(workspace)
                 .build());
-        return new TestcaseCreateRes(result.getId(), result.getName(), result.getExplanation());
+        return new TestcaseCreateRes(result.getId(), result.getName(), result.getAssignee(), result.getCategory1(), result.getCategory2(), result.getCategory3(), result.getStatus().name());
     }
 
     public List<TestcaseItem> findList(TestcaseSearch param) {

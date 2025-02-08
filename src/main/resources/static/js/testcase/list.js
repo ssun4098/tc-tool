@@ -1,10 +1,120 @@
+class TestcaseManager {
+    constructor(workspaceId) {
+        this.init(workspaceId).then(() => {
+            document.dispatchEvent(new Event('testcaseListInit'));
+        });
+    }
+
+    addTestcase(data) {
+        apiClient.post("/api/testcases", data, (response) => {
+            this.testcaseList.push(response);
+            document.dispatchEvent(new Event('testcaseListInit'));
+        });
+    }
+
+    updateTestcase(data) {
+
+    }
+
+    getTestcaseList() {
+        return this.testcaseList;
+    }
+
+    deleteTestcase(id) {
+
+    }
+
+    async init(workspaceId) {
+        try {
+            this.testcaseList = await apiClient.get(`/api/testcases`, { workspaceId });
+            } catch (error) {
+                console.error('Error fetching testcase list:', error);
+            }
+    }
+}
+
+class TestcaseView {
+    constructor(testcaseManager) {
+        this.testcaseManager = testcaseManager;
+        this.testcaseStatusMap = Object.freeze({
+            NOT_STARTED: `<span class="status-label-bg status-inactive">시작전</span>`,
+            IN_PROGRESS: `<span class="status-label-bg status-active">진행중</span>`,
+            BLOCKED: `<span class="status-label-bg status-pending">보류</span>`,
+            ON_HOLD: `<span class="status-label-bg status-onhold">보류중</span>`,
+            COMPLETED: `<span class="status-label-bg status-completed">완료</span>`,
+            PASS: `<span class="status-label-bg status-pass">통과</span>`
+        });
+    }
+
+    getTestcaseRow({ id, name, category1, category2, category3, status, assignee }) {
+        return `<tr>
+            <td>${id}</td>
+            <td><b>${name}</b></td>
+            <td>${category1}</td>
+            <td>${category2}</td>
+            <td>${category3}</td>
+            <td>${this.getStatusLabel(status)}</td>
+            <td class="align-center">
+              <div class="user-label">
+                <span>${assignee}</span>
+              </div>
+            </td>
+            <td>
+              <button class="btn btn-execute"><i data-lucide="play"></i> Execute</button>
+            </td>
+            <td>
+              <div class="action-buttons">
+                <button class="btn btn-icon btn-primary" data-tooltip="Edit">
+                  <i data-lucide="edit-2"></i>
+                </button>
+                <button class="btn btn-icon btn-danger" data-tooltip="Delete">
+                  <i data-lucide="trash-2"></i>
+                </button>
+              </div>
+            </td>
+          </tr>`;
+    }
+
+    getStatusLabel(status) {
+        const statusLabels = {
+            'NOT_STARTED': this.testcaseStatusMap.NOT_STARTED,
+            'IN_PROGRESS': this.testcaseStatusMap.IN_PROGRESS,
+            'BLOCKED': this.testcaseStatusMap.BLOCKED,
+            'ON_HOLD': this.testcaseStatusMap.ON_HOLD,
+            'COMPLETED': this.testcaseStatusMap.COMPLETED,
+            'PASS': this.testcaseStatusMap.PASS
+        };
+        return statusLabels[status] || 'Unknown Status';
+    }
+
+    drawTestcaseList() {
+        const $testcaseTableBody = document.getElementById('testcase-table-body');
+        $testcaseTableBody.innerHTML = ``;
+        let node = ``;
+        this.testcaseManager.getTestcaseList().forEach((testcase) => {
+            node += this.getTestcaseRow(testcase);
+        });
+        $testcaseTableBody.innerHTML = node;
+        lucide.createIcons();
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-  lucide.createIcons();
+  const urlParams = new URLSearchParams(window.location.search);
+  const testcaseManager = new TestcaseManager(urlParams.get('workspaceId'));
+  const testcaseView = new TestcaseView(testcaseManager);
+
   const $addTestcaseButton = document.getElementById('add-testcase-button');
   const $testcaseModal = document.getElementById('testcase-modal');
   const $closeModalButton = document.getElementsByClassName("close")[0];
   const $testcaseSubmitButton = document.getElementById("testcase-submit-button");
 
+
+  lucide.createIcons();
+  document.addEventListener('testcaseListInit', () => {
+        console.log('callback')
+        testcaseView.drawTestcaseList();
+  });
   $addTestcaseButton.addEventListener("click", () => {
       $testcaseModal.style.display = "block";
   })
@@ -20,15 +130,21 @@ document.addEventListener("DOMContentLoaded", () => {
       const category3 = document.getElementById('category3').value;
       const assignee = document.getElementById('testcase-assignee').value;
       const explanation = document.getElementById('testcase-explanation').value;
+      const link = document.getElementById("testcase-link").value
       const url = new URL(window.location);
       const workspaceId = url.searchParams.get("workspaceId");
-      apiClient.post('/api/testcases', {name,
-                                         category1,
-                                         category2,
-                                         category3,
-                                         assignee,
-                                         explanation,
-                                         workspaceId}, (data) => console.log(data));
+      const data = {
+        name,
+        category1,
+        category2,
+        category3,
+        assignee,
+        explanation,
+        link,
+        url,
+        workspaceId
+      }
+      testcaseManager.addTestcase(data);
   })
 });
 
