@@ -3,10 +3,8 @@ const handleError = (error) => {
 }
 
 const apiClient = {
-    baseURL: 'http://localhost:7300',
   
     request: async function (url, options = {}, onSuccess) {
-      const finalUrl = `${this.baseURL}${url}`;
       const defaultHeaders = {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -18,7 +16,7 @@ const apiClient = {
       };
 
       try {
-        const response = await fetch(finalUrl, config);
+        const response = await fetch(url, config);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
