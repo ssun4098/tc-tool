@@ -14,4 +14,9 @@ public class TestcaseView {
         return "/html/testcase/list.html";
     }
 
+    @GetMapping("/execute")
+    public String execute() {
+        return "/html/testcase/execute.html";
+    }
+
 }

@@ -7,6 +7,7 @@ class TestcaseManager {
 
   addTestcase(data) {
     apiClient.post("/api/testcases", data, (response) => {
+      document.getElementById("testcase-modal").style.display = "none";
       this.testcaseList.push(response);
       document.dispatchEvent(new Event("testcaseListInit"));
     });
@@ -73,6 +74,9 @@ class TestcaseView {
         case "delete":
           testcaseManager.deleteTestcase(id);
           break;
+        case "execute":
+          location.href = `/testcases/execute?testcaseId=${id}`;
+          break;
         default:
           console.log("Other element clicked.");
       }
@@ -101,7 +105,7 @@ class TestcaseView {
               </div>
             </td>
             <td>
-              <button class="btn btn-execute"><i data-lucide="play"></i> Execute</button>
+              <button class="btn btn-execute" data-action="execute" data-id='${id}'><i data-lucide="play"></i> Execute</button>
             </td>
             <td>
               <div class="action-buttons">
