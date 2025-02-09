@@ -60,6 +60,16 @@ public class Testcase extends BaseEntity {
         this.link = link;
     }
 
+    public void update(String name, String explanation, String assignee, String category1, String category2, String category3, String link) {
+        this.name = name;
+        this.explanation = explanation;
+        this.assignee = assignee;
+        this.category1 = category1;
+        this.category2 = category2;
+        this.category3 = category3;
+        this.link = link;
+    }
+
     public void delete() {
         this.isDeleted = true;
     }

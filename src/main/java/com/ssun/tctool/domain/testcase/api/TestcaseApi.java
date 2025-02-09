@@ -1,9 +1,6 @@
 package com.ssun.tctool.domain.testcase.api;
 
-import com.ssun.tctool.domain.testcase.dto.TestcaseCreateReq;
-import com.ssun.tctool.domain.testcase.dto.TestcaseCreateRes;
-import com.ssun.tctool.domain.testcase.dto.TestcaseItem;
-import com.ssun.tctool.domain.testcase.dto.TestcaseSearch;
+import com.ssun.tctool.domain.testcase.dto.*;
 import com.ssun.tctool.domain.testcase.service.TestcaseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -25,5 +22,16 @@ public class TestcaseApi {
     @GetMapping
     public ResponseEntity<List<TestcaseItem>> findList(TestcaseSearch search) {
         return ResponseEntity.ok(testcaseService.findList(search));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<TestcaseUpdateRes> update(@PathVariable Long id, @RequestBody TestcaseUpdateReq body) {
+        return ResponseEntity.ok(testcaseService.updateTestcase(id, body));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        testcaseService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

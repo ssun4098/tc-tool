@@ -1,9 +1,6 @@
 package com.ssun.tctool.domain.testcase.service;
 
-import com.ssun.tctool.domain.testcase.dto.TestcaseCreateReq;
-import com.ssun.tctool.domain.testcase.dto.TestcaseCreateRes;
-import com.ssun.tctool.domain.testcase.dto.TestcaseItem;
-import com.ssun.tctool.domain.testcase.dto.TestcaseSearch;
+import com.ssun.tctool.domain.testcase.dto.*;
 import com.ssun.tctool.domain.testcase.infra.entity.Testcase;
 import com.ssun.tctool.domain.testcase.infra.repository.TestcaseRepository;
 import com.ssun.tctool.domain.workspace.entity.Workspace;
@@ -56,5 +53,29 @@ public class TestcaseService {
                         .build())
                 )
                 .toList();
+    }
+
+    @Transactional
+    public TestcaseUpdateRes updateTestcase(Long id, TestcaseUpdateReq param) {
+        Testcase testcase = testcaseRepository.findById(id)
+                .orElseThrow(() -> new CommonException("테스트케이스를 찾을 수 없습니다.", HttpStatus.NOT_FOUND));
+        testcase.update(param.getName(), param.getExplanation(), param.getAssignee(), param.getCategory1(), param.getCategory2(), param.getCategory3(), param.getLink());
+        testcaseRepository.save(testcase);
+        return TestcaseUpdateRes.builder()
+                .id(testcase.getId())
+                .name(testcase.getName())
+                .assignee(testcase.getAssignee())
+                .category1(testcase.getCategory1())
+                .category2(testcase.getCategory2())
+                .category3(testcase.getCategory3())
+                .build();
+    }
+
+
+    @Transactional
+    public void delete(Long id) {
+        Testcase testcase = testcaseRepository.findById(id)
+                .orElseThrow(() -> new CommonException("테스트케이스를 찾을 수 없습니다.", HttpStatus.NOT_FOUND));
+        testcase.delete();
     }
 }
